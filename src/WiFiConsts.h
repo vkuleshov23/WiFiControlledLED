@@ -4,8 +4,8 @@
 #include <ESP8266WiFi.h>
 
 /* change it with your ssid-password */
-const char* ssid = "239193 Info-Lan";
-const char* password = "83435276";
+const char* ssid = "SSID";
+const char* password = "PASSWORD";
 IPAddress ip(192,168,0,230);  //статический IP
 IPAddress gateway(192,168,0,1);
 IPAddress subnet(255,255,255,0);
