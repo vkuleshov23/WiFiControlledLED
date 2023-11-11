@@ -8,18 +8,22 @@
 
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
+#include <GyverButton.h>
 #include "Web.h"
 #include "WiFiConsts.h"
 #include "Const.h"
 #include "Settings.h"
 
 ESP8266WebServer webServer(80);
+GButton button(buttonPin);
 Settings leds;
+// bool isTurnOn = false;
+// int r = 0, g = 0, b = 0;
 
-void fade(int pin);
-void testRGB();
-void blinking(int pin);
-void black();
+// void fade(int pin);
+// void testRGB();
+// void blinking(int pin);
+// void black();
 
 void handleRoot() {
     String red = webServer.arg(0); // read RGB arguments
@@ -40,18 +44,27 @@ void handleRoot() {
         // analogWrite(greenLED, MAX - green.toInt());
         // analogWrite(blueLED, MAX - blue.toInt());
     }
+    // if (red == "0" && green == "0" && blue == "0") {
+    //     isTurnOn = false;
+    // } else {
+    //     r = red.toInt();
+    //     g = green.toInt();
+    //     b = blue.toInt();
+    //     isTurnOn = true;
+    // }
     webServer.send(200, "text/html", WEB);
 }
 
 void setup() {
     pinMode(redLED, OUTPUT);
+    pinMode(buttonPin, INPUT_PULLUP);
     pinMode(greenLED, OUTPUT);
     pinMode(blueLED, OUTPUT);
     analogWrite(redLED, MAX);
     analogWrite(greenLED, MAX);
     analogWrite(blueLED, MAX);
     delay(100);
-    Serial.begin(115200);
+    Serial.begin(9600);
     Serial.println();
     WiFi.begin(ssid, password);
     WiFi.config(ip, gateway, subnet);
@@ -64,54 +77,65 @@ void setup() {
 }
 
 void loop() {
+    // button.tick();
     webServer.handleClient();
     leds.show();
+    // if(button.isStep()) {
+    //     leds.nextMode();
+    // } else if(button.isClick()) {
+    //    if(isTurnOn) {
+    //        leds.setRGB(0, 0, 0);
+    //    } else {
+    //         leds.setRGB(r, g, b);
+    //    }
+    //    isTurnOn = !isTurnOn;
+    // }
 }
 
-void testRGB() { // fade in and out of Red, Green, Blue
-    analogWrite(redLED, MAX); // R off
-    analogWrite(greenLED, MAX); // G off
-    analogWrite(blueLED, MAX); // B off
+// void testRGB() { // fade in and out of Red, Green, Blue
+//     analogWrite(redLED, MAX); // R off
+//     analogWrite(greenLED, MAX); // G off
+//     analogWrite(blueLED, MAX); // B off
 
-    blinking(redLED);
-    // delay(1000);
-    blinking(greenLED);
-    // delay(1000);
-    blinking(blueLED);
+//     blinking(redLED);
+//     // delay(1000);
+//     blinking(greenLED);
+//     // delay(1000);
+//     blinking(blueLED);
 
-    // black();
-    // fade(redLED); // R
-    // black();
-    // delay(1000);
-    // fade(greenLED); // G
-    // black();
-    // delay(1000);
-    // fade(blueLED); // B
-    // black();
-}
+//     // black();
+//     // fade(redLED); // R
+//     // black();
+//     // delay(1000);
+//     // fade(greenLED); // G
+//     // black();
+//     // delay(1000);
+//     // fade(blueLED); // B
+//     // black();
+// }
 
-void blinking(int pin) {
-    for(int i = 0; i < 10; i++) {
-        analogWrite(pin, 0);
-        delay(100);
-        black();
-        delay(100);
-    }
-}
+// void blinking(int pin) {
+//     for(int i = 0; i < 10; i++) {
+//         analogWrite(pin, 0);
+//         delay(100);
+//         black();
+//         delay(100);
+//     }
+// }
 
-void black() {
-    analogWrite(redLED, MAX);
-    analogWrite(greenLED, MAX);
-    analogWrite(blueLED, MAX);
-}
+// void black() {
+//     analogWrite(redLED, MAX);
+//     analogWrite(greenLED, MAX);
+//     analogWrite(blueLED, MAX);
+// }
 
-void fade(int pin) {
-    for (int u = 0; u < MAX; u++) {
-        analogWrite(pin, u);
-        delay(10);
-    }
-    for (int u = 0; u < MAX; u++) {
-        analogWrite(pin, MAX - u);
-        delay(10);
-    }
-}
+// void fade(int pin) {
+//     for (int u = 0; u < MAX; u++) {
+//         analogWrite(pin, u);
+//         delay(10);
+//     }
+//     for (int u = 0; u < MAX; u++) {
+//         analogWrite(pin, MAX - u);
+//         delay(10);
+//     }
+// }

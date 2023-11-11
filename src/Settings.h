@@ -16,6 +16,7 @@ class Settings {
         ~Settings() {}
         
         void setMode(int new_mode) { mode = new_mode; }
+        void nextMode() { mode = ((mode)%5) + 1; }
         void setRed(int new_red) { red = new_red; }
         void setGreen(int new_green) { green = new_green; }
         void setBlue(int new_blue) { blue = new_blue; }

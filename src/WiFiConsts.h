@@ -4,10 +4,10 @@
 #include <ESP8266WiFi.h>
 
 /* change it with your ssid-password */
-const char* ssid = "Beeline_2G";
-const char* password = "Transcend23";
-IPAddress ip(192,168,1,73);  //статический IP
-IPAddress gateway(192,168,1,1);
+const char* ssid = "239193 Info-Lan";
+const char* password = "83435276";
+IPAddress ip(192,168,0,230);  //статический IP
+IPAddress gateway(192,168,0,1);
 IPAddress subnet(255,255,255,0);
 
 const byte DNS_PORT = 53;

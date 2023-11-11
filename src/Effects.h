@@ -18,7 +18,7 @@ class Effects {
         void refreshBrightness() { brightness = 0; }
         void refreshValue() { value = 1.0; }
 
-        void write(int r, int g, int b) { 
+        void write(int g, int r, int b) { 
             analogWrite(redLED, MAX - r);
             analogWrite(greenLED, MAX - g);
             analogWrite(blueLED, MAX - b);
@@ -120,7 +120,7 @@ class Effects {
                     break;
                 }
                 brightness++;
-                timer.start(2000);
+                timer.start(4000);
             }
         }
 

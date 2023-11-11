@@ -1,59 +1,49 @@
 #ifndef _PIN_CONSTS_
 #define _PIN_CONSTS_
-    const int redLED = 5; //D3
-    const int greenLED = 0; //D1
-    const int blueLED = 4; //D2
+    const int redLED = D3; //D3
+    const int greenLED = D1; //D1
+    const int blueLED = D2; //D2
 
-    const int modeLED = 2; //D4
+    const int buttonPin = D4; //D4
 
     const int MAX = 255;
 
+    void write(int r, int g, int b) { 
+        analogWrite(redLED, MAX - r);
+        analogWrite(greenLED, MAX - g);
+        analogWrite(blueLED, MAX - b);
+    }
+
     void setGREEN() {
-        analogWrite(redLED, MAX);
-        analogWrite(greenLED, 0);
-        analogWrite(blueLED, MAX);
+        write(MAX, 0, 0);
     }
 
     void setRED() {
-        analogWrite(redLED, 0);
-        analogWrite(greenLED, MAX);
-        analogWrite(blueLED, MAX);
+        write(0, MAX, 0);
     }
 
     void setBLUE() {
-        analogWrite(redLED, MAX);
-        analogWrite(greenLED, MAX);
-        analogWrite(blueLED, 0);
+        write(0, 0, MAX);
     }
 
     void setPURPLE() {
-        analogWrite(redLED, 0);
-        analogWrite(greenLED, MAX);
-        analogWrite(blueLED, 0);
+        write(0, MAX, MAX);
     }
 
     void setYELLOW() {
-        analogWrite(redLED, 0);
-        analogWrite(greenLED, 0);
-        analogWrite(blueLED, MAX);
+        write(MAX, MAX, 0);
     }
 
     void setAQUA() {
-        analogWrite(redLED, MAX);
-        analogWrite(greenLED, 0);
-        analogWrite(blueLED, 0);
+        write(MAX, 0, MAX);
     }
 
     void setFrogFaints() {
-        analogWrite(redLED, MAX - 0x7b);
-        analogWrite(greenLED, MAX - 0x91);
-        analogWrite(blueLED, MAX - 0x7b);
+        write(0x91, 0x7b, 0x7b);
     }
 
     void setVeryDeepPurpleRed() {
-        analogWrite(redLED, MAX - 0xd7);
-        analogWrite(greenLED, MAX - 0x00);
-        analogWrite(blueLED, MAX - 0x27);
+        write(0x00, 0xd7, 0x27);
     }
 
 #endif
